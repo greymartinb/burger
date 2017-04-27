@@ -1,0 +1,61 @@
+<header class= 'container'>
+  <div class='row'>
+    <div class= "jumbotron col-md-12"> 
+<h1>Burgers!</h1>
+
+
+  </div>
+  </div>
+  
+  <div class= "row">
+  <div class= "col-md-6 col-lg-6 col-sm-6">
+  <h2>Burgers to EAT!</h2>
+<ul>
+  {{#each burger_name}}
+    {{#unless this.devoured}}
+      <li>
+        {{this.burger_name}}
+
+        <form action="/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="devoured" value="true">
+          <button type="submit">eat</button>
+        </form>
+
+      </li>
+    {{/unless}}
+  {{/each}}
+</ul>
+  </div>
+
+  <div class= "col-md-6 col-lg-6 col-sm-6">
+
+<h2>Burgers that are devoured!</h2>
+
+<ul>
+  {{#each burger_name}}
+    {{#if this.devoured}}
+      <li>
+        {{this.burger_name}}
+
+        <form action="/{{this.id}}?_method=delete" method="POST">
+          <input type="hidden" name="id">
+          <button type="submit">delete!</button>
+        </form>
+
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+  </div>
+  </div>
+<h2>Add a Burger</h2>
+<form class="create-update-form" action="/" method="POST">
+
+  <div class="form-group">
+    <label for="ca">Burger Name:</label>
+    <input type="text" id="burger" name="name">
+  </div>
+
+  <button type="submit">Add a burger</button>
+</form>
